@@ -1,0 +1,211 @@
+/* Global color variables */
+:root {
+	--main-bg-color: #fcfcfc;
+	--alt-bg-color: #f4f4f4;
+	--hf-bg-color: #444444;
+	--hf-txt-color: #f2f2f2;
+	--hv-color: #909090;
+}
+
+/* Parent Attributes*/
+body {
+  font: 1em/1.5 'Roboto', Arial, Helvetica,sans-serif;
+  padding:0;
+  background-color: var(--main-bg-color);
+}
+
+aside {
+	background-color: var(--alt-bg-color);
+}
+
+header, footer {
+	color: var(--hf-txt-color);
+	background-color: var(--hf-bg-color);
+	padding: 0.5em;
+}
+
+body footer {
+	font-size: 1.3em;
+}
+
+.center {
+	text-align: center;
+}
+
+header.branding {
+	font-size: 1.5em;
+}
+
+/* The navigation bar */
+nav {
+    overflow: hidden;
+    background-color: #333;
+   /* position: fixed; /* Set the navbar to fixed position */
+   /* top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
+
+/* Links inside navbar */
+nav a {
+    color: var(--hf-txt-color);
+    text-align: center;
+    padding: 1em 1.2em;
+    text-decoration: none;
+}
+
+/* Link selection visual feedback */
+.current {
+	font-weight: bold;
+	background-color: var(--main-bg-color);
+	color: initial;
+}
+
+a.current {
+	outline: 5px solid var(--hf-bg-color);
+	pointer-events:none;
+}
+/* Link hoverstate for visual feedback */
+
+a:hover {
+	background-color: var(--hv-color);
+}
+
+/* Grid Layout - Grid ALL THE THINGS */
+/* Parent Grid definitions */
+header {
+    grid-area: header;
+}
+
+nav {
+    grid-area: nav;
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+}
+
+/* Nested Grid (1) definitions */
+.first {
+	grid-area: sec1;
+	padding:1em;
+}
+
+.second {
+	grid-area: sec2;
+}
+
+/* Nested Grid (2) definitions */
+main section.second header {
+	grid-area: head2;
+}
+
+main section.second article {
+	grid-area: article2;
+	padding: 1em;
+}
+
+main section.second aside {
+	grid-area: aside2;
+	padding:1em;
+}
+
+/* Parent Grid Layout */
+/* Single Column default view */
+body {
+    display: grid;
+    grid-gap: 0em;
+    grid-template-areas:
+    "header"
+    "nav"
+    "main"
+    "footer";
+    max-width: 1200px;
+    margin: auto;
+    /* max width and margin limits size and keeps body centered */
+}
+
+header {
+	display: grid;
+	grid-gap: 0em;
+	grid-template-areas:
+	"header nav";
+}
+
+nav {
+	display: grid;
+	grid-gap: 0em;
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.nested1 {
+	display: grid;
+	grid-gap: 1em;
+	grid-template-areas:
+	"sec1"
+	"sec2";
+}
+
+.nested2 {
+	display: grid;
+	grid-gap: 1em;
+	grid-template-areas:
+	"head2"
+	"article2"
+	"aside2";
+}
+
+/* Media queries for dynamic layout */
+/* 2 Column tablet view & landscape phone view */
+@media only screen and (min-width: 500px)  {
+	.nested1 {
+		grid-gap: 1em;
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas:
+		"sec1 sec2";
+	}
+}
+
+/* 3 Column tablet view & Desktop View */
+@media only screen and (min-width: 800px)  {
+	.nested1 {
+		grid-gap: 0em;
+		grid-template-columns: 1fr 2fr;
+		grid-template-areas:
+		"sec1 sec2";
+	}
+	.nested2 {
+		grid-gap: 0em;
+		grid-template-columns: 2fr 1fr;
+		grid-template-areas:
+		"head2 head2"
+		"article2 aside2";
+	}
+	body {
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas:
+		"header nav"
+		"main main"
+		"footer footer";
+	}		
+}
+
+/* 3 Column tablet view, Desktop View, Presentation View */
+@media only screen and (min-width: 1000px)   {
+	.nested1 {
+		grid-gap: 0em;
+		grid-template-columns: 1fr 3fr;
+		grid-template-areas:
+		"sec1 sec2";
+	}
+	.nested2 {
+		grid-gap: 0em;
+		grid-template-columns: 2fr 1fr;
+		grid-template-areas:
+		"head2 head2"
+		"article2 aside2";
+    }
+}
